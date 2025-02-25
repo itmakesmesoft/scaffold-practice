@@ -13,6 +13,8 @@ scaffold라는 말은 건설에서 자주 쓰이는데, 발판(비계)을 의미
 ## scaffold tool
 가장 잘 알려진 scaffold 라이브러리는 hygen이 있다. 이를 사용해볼 예정
 
+
+# practice 
 ## hygen 설치
 
 - yarn
