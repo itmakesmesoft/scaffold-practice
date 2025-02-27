@@ -75,7 +75,50 @@ export default <%= name %>;
 
 ## Prompt로 상호작용 하기
 
-- [문서](https://web.archive.org/web/20230417132443/http://www.hygen.io/docs/generators#interactive-prompt)
+- [공식 문서 참고](https://web.archive.org/web/20230417132443/http://www.hygen.io/docs/generators#interactive-prompt)
+
+## .hygen.js
+
+`.hygen.js` 파일은 hygen이 실행되기 전에 실행되는 파일
+
+- hygen을 실행하면 hygen은 `.hygen.js` 파일을 먼저 찾기 시작하고, 파일이 존재하면 바로 실행하는 메커니즘
+- root 디렉토리에 추가
+
+### helpers 함수 추가
+
+`.hygen.js` 파일을 이용하면, hygen이 실행되기 전에 실행되는 함수를 정의할 수 있는데, 이를 helpers함수라고 칭함.
+
+이후 템플릿 내에서 이를 변수처럼 활용할 수 있음
+
+- 템플릿 내에서는 `h.methodName()` 형태로 접근 가능하고, 마찬가지로 `<%= … %>` 문법을 사용
+
+### **example**
+
+```jsx
+// .hygen.js
+
+const formatDateAsYYYYMMDD = (date) => {
+  const year = date.getFullYear();
+  const month =
+    date.getMonth() > 9
+      ? date.getMonth() + 1
+      : "0" + String(date.getMonth() + 1);
+  const day = date.getDate();
+  return `${year}-${month}-${day}`;
+};
+
+module.exports = {
+  helpers: {
+    now: () => formatDateAsYYYYMMDD(new Date()),
+  },
+};
+```
+
+```jsx
+// index.ejs.t
+# 파일의 생성일은 <%= h.now() %> 입니다.
+```
+
 
 ## 참고
 
